@@ -32,6 +32,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/products', function (req, res, next) {
   res.json({msg: 'This is CORS-enabled for a whitelisted domain.'})
 })
+app.post('/products', function (req, res, next) {
+
+  res.send(req.body)
+})
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
