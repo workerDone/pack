@@ -7,6 +7,8 @@ var sassMiddleware = require('node-sass-middleware');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+// 
+const request = require('request-promise')
 
 // Cors
 var cors = require('cors')
@@ -35,6 +37,21 @@ app.get('/products', function (req, res, next) {
 app.post('/products', function (req, res, next) {
 
   res.send(req.body)
+})
+app.get('/man', function (req, res, next) {
+ const options = {
+  method: 'GET',
+  uri: 'https://risingstack.com'
+ };
+  request(options)
+ .then(function (response) {
+     // Запрос был успешным, используйте объект ответа как хотите
+     res.json(response)
+ })
+ .catch(function (err) {
+  res.json({response: 'error'})
+ })
+  
 })
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
