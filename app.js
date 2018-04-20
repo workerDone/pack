@@ -40,8 +40,8 @@ app.post('/products', function (req, res, next) {
 })
 app.get('/man', function (req, res, next) {
  const options = {
-  method: 'GET',
-  uri: 'https://risingstack.com'
+  method: 'POST',
+  uri: 'https://app-phone-app.herokuapp.com/products'
  };
   request(options)
  .then(function (response) {
