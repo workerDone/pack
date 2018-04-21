@@ -6,14 +6,19 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "assert": "^1.4.1",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
+    "mongodb": "^2.2.35",
     "morgan": "~1.9.0",
     "node-sass-middleware": "0.11.0",
     "request-promise": "^4.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
   }
 }

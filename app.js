@@ -9,7 +9,9 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 // 
 const request = require('request-promise')
-
+var MongoClient = require('mongodb').MongoClient;
+var assert = require('assert');
+var url = 'mongodb://localhost:27017/name';
 // Cors
 var cors = require('cors')
 
@@ -31,20 +33,46 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/', indexRouter);
 app.get('/products', function (req, res, next) {
   res.json({msg: 'This is CORS-enabled for a whitelisted domain.'})
 })
-app.post('/products', function (req, res, next) {
 
-  res.send(req.body)
-})
+
+app.post('/products', function (req, res, next) {
+  console.log('file')
+  MongoClient.connect(url, function(err, db) {
+    assert.equal(null, err);
+    var collection = db.collection('more');
+   
+  //  collection.insert({
+  //    name: req.body.name,
+  //    gender: req.body.email
+  //  }, function(err, docs) {
+  //    console.log(docs)
+  //   if (err) {
+  //     res.json(err)
+  //     db.close();
+  //   } else {
+  //     res.json(docs);
+  //     db.close();
+  //   }
+  collection.find({}).toArray ( function (err, docs) {
+    console.log(docs);
+    res.json(docs);
+    db.close();
+  })
+   })
+  // res.send(req.body)
+});
+
 app.get('/man', function (req, res, next) {
  const options = {
   method: 'POST',
-  uri: 'https://app-phone-app.herokuapp.com/products',
-  body : {
-    hello: "man"
-  }
+  uri: 'https://jsonplaceholder.typicode.com/posts',
+  // body : {
+  //   hello: "man"
+  // }
  };
   request(options)
  .then(function (response) {
@@ -56,7 +84,6 @@ app.get('/man', function (req, res, next) {
  })
   
 })
-// app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
