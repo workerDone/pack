@@ -49,7 +49,8 @@ router.post('*', function (req, res, next) {
         collection.insert({
             "name": req.body.name,
             "password": req.body.password,
-            "email": req.body.email
+            "email": req.body.email,
+            "token": +new Date() + req.body.name + 10000000 * +new Date()
         }, function (err, docs) {
             if (err) {
                 res.json(err)

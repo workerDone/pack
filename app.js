@@ -8,9 +8,11 @@ let assert = require('assert');
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
 let error = require('./routes/error');
-let addUser = require('./routes/addUser');
+let registration = require('./routes/registration');
+let login = require('./routes/login');
 
-app.use('/login', addUser);
+app.use('/registration', registration);
+app.use('/login', login);
 
 app.post('/find', function (req, res, next) {
   MongoClient.connect(url, function (err, db) {
