@@ -1,40 +1,22 @@
 
-var app = require('./settings');
-var url = 'mongodb://Ivan:Ivan@cluster0-shard-00-00-n5kxm.mongodb.net:27017,cluster0-shard-00-01-n5kxm.mongodb.net:27017,cluster0-shard-00-02-n5kxm.mongodb.net:27017/MyMonDb?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin'
-// var url = 'mongodb://localhost:27017/name'; 
-var MongoClient = require('mongodb').MongoClient;
-var assert = require('assert');
+let app = require('./settings');
+let url = 'mongodb://Ivan:Ivan@cluster0-shard-00-00-n5kxm.mongodb.net:27017,cluster0-shard-00-01-n5kxm.mongodb.net:27017,cluster0-shard-00-02-n5kxm.mongodb.net:27017/MyMonDb?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin'
+// let url = 'mongodb://localhost:27017/name'; 
+let MongoClient = require('mongodb').MongoClient;
+let assert = require('assert');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var error = require('./routes/error');
+let indexRouter = require('./routes/index');
+let usersRouter = require('./routes/users');
+let error = require('./routes/error');
+let addUser = require('./routes/addUser');
 
-app.post('/products', function (req, res, next) {
-
-  MongoClient.connect(url, function (err, db) {
-    assert.equal(null, err);
-    var collection = db.collection('name');
-
-    collection.insert({
-      name: req.body.name,
-      gender: req.body.email
-    }, function (err, docs) {
-      if (err) {
-        res.json(err)
-        db.close();
-      } else {
-        res.json(docs);
-        db.close();
-      }
-    })
-  })
-});
+app.use('/login', addUser);
 
 app.post('/find', function (req, res, next) {
   MongoClient.connect(url, function (err, db) {
 
     assert.equal(null, err);
-    var collection = db.collection('name');
+    let collection = db.collection('name');
 
     collection.find({}).toArray(function (err, docs) {
       res.json(docs);
