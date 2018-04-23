@@ -10,7 +10,7 @@ let usersRouter = require('./routes/users');
 let error = require('./routes/error');
 let registration = require('./routes/registration');
 let login = require('./routes/login');
-
+app.use('/',indexRouter)
 app.use('/registration', registration);
 app.use('/login', login);
 
