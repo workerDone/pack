@@ -5,6 +5,8 @@ let url = 'mongodb://Ivan:Ivan@cluster0-shard-00-00-n5kxm.mongodb.net:27017,clus
 let MongoClient = require('mongodb').MongoClient;
 let assert = require('assert');
 
+// let jwt = require('jwt');
+
 router.post('*', function(req, res, next) {
   
     MongoClient.connect(url, function (err, db) {
