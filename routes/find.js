@@ -1,19 +1,19 @@
-var express = require('express');
+const express = require('express');
 const router = express.Router();
 let connect = require('../db');
 
+router.post('*', function (req, res, next) {
 
-router.post('*', function(req, res, next) {
     connect()
         .then((data) => {
 
             data.db('MyMonDb').collection('name')
-            .find({ "email": req.body.email , "name": req.body.name, "password": req.body.password})
+                .find({})
                 .toArray(function (err, docs) {
                     if (docs.length) {
                         res.json(docs);
                     } else {
-                        res.json({"user": "user don't exists"});
+                        res.json({ "user": "user don't exists" });
                     }
                     data.close();
                 })
