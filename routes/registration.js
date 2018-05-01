@@ -2,8 +2,6 @@ let express = require('express');
 let router = express.Router();
 let connect = require('../db');
 let connect1 = require('../db');
-// let url = 'mongodb://Ivan:Ivan@cluster0-shard-00-00-n5kxm.mongodb.net:27017,cluster0-shard-00-01-n5kxm.mongodb.net:27017,cluster0-shard-00-02-n5kxm.mongodb.net:27017/MyMonDb?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin'
-// let MongoClient = require('mongodb').MongoClient;
 
 
 const Joi = require('joi');
