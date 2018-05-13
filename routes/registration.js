@@ -53,7 +53,8 @@ router.post('*', function (req, res, next) {
         .then(data => {
             data.db('MyMonDb').collection('name')
                 .insert({
-                    "name": req.body.name,
+                    "firstName": req.body.firstName,
+                    "lastName": req.body.lastName,
                     "password": req.body.password,
                     "email": req.body.email,
                     "token": +new Date() + req.body.name + 10000000 * +new Date()
