@@ -6,7 +6,9 @@ let connect = require('../db');
 router.post('*', function(req, res, next) {
     connect()
         .then((data) => {
+            try {
 
+            
             data.db('MyMonDb').collection('name')
             .find({ "email": req.body.email , "name": req.body.name, "password": req.body.password})
                 .toArray(function (err, docs) {
@@ -17,6 +19,9 @@ router.post('*', function(req, res, next) {
                     }
                     data.close();
                 })
+            } catch (error) {
+                res.send(error)
+            }
         })
 });
 

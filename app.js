@@ -10,8 +10,9 @@ let error = require('./routes/error');
 let registration = require('./routes/registration');
 let login = require('./routes/login');
 let find = require('./routes/find');
+let db =  require('./db');
 
-
+db();
 app.use('/', indexRouter)
 app.use('/registration', registration);
 app.use('/login', login);
